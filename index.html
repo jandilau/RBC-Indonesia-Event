@@ -13,12 +13,73 @@
 	<script src="js/utility.js"></script>   
 	<script type="text/javascript" charset="utf-8" src="js/jquery.mobile-1.2.0.min.js"></script>
 	<script type="text/javascript" charset="utf-8" src="js/jquery.touchToClick.js"></script>
+	<script type="text/javascript" charset="utf-8" src="js/modernizr-latest.js"></script>
 	
-	<script type="text/javascript" charset="utf-8" src="phonegap.js"></script>  
+	<script type="text/javascript" charset="utf-8" src="phonegap.js"></script>  	
+
+    <style>
+        #message {
+            display: none;
+            border-radius: 10px;
+            padding: 10px;
+            background-color: #ff0000;
+            color: #fff;
+        }
+
+        #settingPage h2 {
+            white-space: normal;
+        }
+    </style>	
+    <script type="text/javascript">
+        var localStorageKey = "country";
+        $('#settingPage').live('pagecreate', function() {
+            if (Modernizr.localstorage) {
+                showStoreValue();
+            }
+            else {
+                $('#message').text("Unfortunately your browser doesn't support local storage");
+                $('#saveSetting').attr('disabled', 'disabled');
+                $('#message').show();
+            }
+            $('#saveSetting').click(function(e) {
+				//alert($("input[name='country']:checked").val());
+                localStorage.setItem(localStorageKey, $("input[name='country']:checked").val());
+                showStoreValue();
+                e.preventDefault();
+				$.mobile.changePage("index.html");
+            });
+			
+			/*
+            $("input[name='country']:checked").click(function(e) {
+				//alert($("input[name='country']:checked").val());
+                localStorage.setItem(localStorageKey, $("input[name='country']:checked").val());
+                showStoreValue();
+                e.preventDefault();
+            });			*/
+        });
+
+        function showStoreValue() {
+            var item = localStorage.getItem(localStorageKey);
+			var strCountry = 'input[name=country][value=' + item + ']';			
+			
+			$(strCountry).prop("checked",true);
+			
+			//$('input[name=country][value=SG]').prop("checked",true);
+			
+            if (item == null) {
+                item = 'Nothing in store';
+            }
+            else if (item.length === 0) {
+                item = 'Store contains empty value';
+            }
+            $('.storeItem').text(item);
+        }
+    </script>
+	
 </head> 
 
 <body>
- <div data-role="page">
+ <div data-role="page" id="mainPage">
    <header data-role="header" class="rbc">
      <h1>
        RBC Event
@@ -48,11 +109,11 @@
          <a href="http://goldfinch.rbcintl.org/phonegap/rbc-indo-srv/site.php?link=audio" data-prefetch> Audio Recording </a>
        </li>
        <li>
-         <a href="http://goldfinch.rbcintl.org/phonegap/rbc-indo-srv/site.php?link=share" data-prefetch> Share </a>
-       </li>
-       <li>
          <a href="http://goldfinch.rbcintl.org/phonegap/rbc-indo-srv/site.php?link=donation" data-prefetch> Donation </a>
        </li>     
+	   <li>
+		<a href="#settingPage"> Setting </a>
+	   </li>
      </ul>
    </div>
 
@@ -62,5 +123,40 @@
 
  </div>
  <!-- /page -->
+ 
+  <div data-role="page" id="settingPage">
+   <header data-role="header" class="rbc">
+	 <a href="" data-rel="back">Back</a>   
+     <h1>
+       Setting
+     </h1>
+   </header>
+   <!-- /header -->
+
+   <div data-role="content">
+		<p id="message"/>
+		<fieldset data-role="controlgroup">
+			<legend><strong>Select country for RBC events:</strong></legend>
+				<input type="radio" name="country" id="ID" value="ID"  />
+				<label for="ID">Indonesia</label>
+
+				<input type="radio" name="country" id="SG" value="SG"  />
+				<label for="SG">Singapore</label>
+
+				<input type="radio" name="country" id="OT" value="OT"  />
+				<label for="OT">Other</label>
+		</fieldset>
+		<input type="button" id="saveSetting" value="Save"/>
+		
+		<!--
+            <li data-role="list-divider">Selected country</li>
+            <li class="storeItem"/>		
+		-->
+   </div>
+	
+   <footer data-role="footer" data-position="fixed" class="rbc">
+      <h4>&copy; RBC Ministries 2012 </h4>
+   </footer> 
+   
 </body>
 </html>
