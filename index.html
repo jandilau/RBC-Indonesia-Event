@@ -46,7 +46,7 @@
                 localStorage.setItem(localStorageKey, $("input[name='country']:checked").val());
                 showStoreValue();
                 e.preventDefault();
-				$.mobile.changePage("index.html");
+				$.mobile.changePage("#mainPage", { transition: "none"});
             });
 			
 			/*
@@ -112,7 +112,7 @@
          <a href="http://goldfinch.rbcintl.org/phonegap/rbc-indo-srv/site.php?link=donation" data-prefetch> Donation </a>
        </li>     
 	   <li>
-		<a href="#settingPage"> Setting </a>
+		<a href="#settingPage" data-prefetch> Setting </a>
 	   </li>
      </ul>
    </div>
