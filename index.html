@@ -1,7 +1,7 @@
 <!DOCTYPE html> 
 <html> 
    <head>    
-   <title>RBC Events</title> 
+   <title>RBC Event</title> 
    <meta name="viewport" content="width=device-width, initial-scale=1">
     
 	<link rel="stylesheet" href="css/jquery.mobile-1.2.0.min.css" />
@@ -31,49 +31,62 @@
         }
     </style>	
     <script type="text/javascript">
-        var localStorageKey = "country";
+        var localCountryIdKey = "countryId";
+		var localCountryDescKey = "countryDesc";
+		var strSite = "http://goldfinch.rbcintl.org/";
+		var strFolder = "";
+		var strLink = "";
+		var countryId = "";
+		var countryDesc = "";
+		var strCountry = "";
+		
+		//showStoreValue();
+		
+		//Setting Page
         $('#settingPage').live('pagecreate', function() {
-            if (Modernizr.localstorage) {
-                showStoreValue();
+            if (Modernizr.localstorage) {				
+				countryId = localStorage.getItem(localCountryIdKey);
+				
+				if (countryId == null || countryId.length === 0) {
+					$.mobile.changePage("#settingPage", { transition: "none"});
+				} else {
+                showStoreValue(); }
+				
+			    strCountry = 'input[name=country][id=' + countryId + ']';						
+			    $(strCountry).prop("checked",true);					
             }
             else {
-                $('#message').text("Unfortunately your browser doesn't support local storage");
-                $('#saveSetting').attr('disabled', 'disabled');
-                $('#message').show();
+                //default to Indonesia if browser does not support html5 local storage
+				countryId = "ID";
+				countryDesc = "Indonesia";
             }
+			
+			//Save Button click event
             $('#saveSetting').click(function(e) {
-				//alert($("input[name='country']:checked").val());
-                localStorage.setItem(localStorageKey, $("input[name='country']:checked").val());
-                showStoreValue();
-                e.preventDefault();
-				$.mobile.changePage("#mainPage", { transition: "none"});
+				countryId = $("input[name='country']:checked").attr("id");
+				countryDesc = $("input[name='country']:checked").val();
+				//alert("'" + countryId + "'");
+					
+				//if (countryId != 'undefined') {
+					localStorage.setItem(localCountryIdKey, countryId);
+					localStorage.setItem(localCountryDescKey, countryDesc);
+					showStoreValue();
+					//e.preventDefault();
+					$.mobile.changePage("#mainPage", { transition: "none"});
+					location.reload();
+				//}
             });
 			
-			/*
-            $("input[name='country']:checked").click(function(e) {
-				//alert($("input[name='country']:checked").val());
-                localStorage.setItem(localStorageKey, $("input[name='country']:checked").val());
-                showStoreValue();
-                e.preventDefault();
-            });			*/
         });
 
         function showStoreValue() {
-            var item = localStorage.getItem(localStorageKey);
-			var strCountry = 'input[name=country][value=' + item + ']';			
+            countryId = localStorage.getItem(localCountryIdKey);
+			countryDesc = localStorage.getItem(localCountryDescKey);
 			
-			$(strCountry).prop("checked",true);
-			
-			//$('input[name=country][value=SG]').prop("checked",true);
-			
-            if (item == null) {
-                item = 'Nothing in store';
-            }
-            else if (item.length === 0) {
-                item = 'Store contains empty value';
-            }
-            $('.storeItem').text(item);
+			strFolder = "phonegap/rbc-" + countryId + "-srv/event.php?link=";
+			strLink = strSite + strFolder;
         }
+
     </script>
 	
 </head> 
@@ -82,39 +95,50 @@
  <div data-role="page" id="mainPage">
    <header data-role="header" class="rbc">
      <h1>
-       RBC Event
+       RBC Events
      </h1>
    </header>
    <!-- /header -->
 
    <div data-role="content">
-	 <h3>
 	 <img src="img/rbc_logo.jpg" alt="RBC Ministries" align="middle"/> <br>
-	 RBC Indonesia Bible Conference</h3> <br>
 	 
-     <ul data-role="listview" data-theme="c" data-dividertheme="d" data-counttheme="e">
-       <li>
-         <a href="http://goldfinch.rbcintl.org/phonegap/rbc-indo-srv/site.php?link=event-information" rel="external" data-prefetch> Event Information </a>
-       </li>
-       <li>
-         <a href="http://goldfinch.rbcintl.org/phonegap/rbc-indo-srv/site.php?link=event-speaker" data-prefetch> Event Speaker </a>
-       </li>
-       <li>
-         <a href="http://goldfinch.rbcintl.org/phonegap/rbc-indo-srv/site.php?link=location-and-map" data-prefetch> Location and Map </a>
-       </li>
-       <li>
-         <a href="http://goldfinch.rbcintl.org/phonegap/rbc-indo-srv/site.php?link=feedback" data-prefetch> Feedback </a>
-       </li>
-       <li>
-         <a href="http://goldfinch.rbcintl.org/phonegap/rbc-indo-srv/site.php?link=audio" data-prefetch> Audio Recording </a>
-       </li>
-       <li>
-         <a href="http://goldfinch.rbcintl.org/phonegap/rbc-indo-srv/site.php?link=donation" data-prefetch> Donation </a>
-       </li>     
-	   <li>
-		<a href="#settingPage" data-transition="none" data-prefetch> Setting </a>
-	   </li>
-     </ul>
+	 <script type="text/javascript"> 
+		showStoreValue();
+		var jqmOption = 'rel="external" data-prefetch';
+	    document.write("<strong>RBC Ministries Events - " + countryDesc + '</strong> <br/>');	
+		
+		//menu items
+		document.write('<br/><p>');
+		document.write('<ul data-role="listview" data-theme="c" data-dividertheme="d" data-counttheme="e">');
+		document.write('  <li>');
+		document.write('    <a href="' + strLink + 'event-information" ' + jqmOption + '> Event Information </a>');
+		document.write('  </li>');
+
+		document.write('  <li>');
+		document.write('    <a href="' + strLink + 'event-speaker" ' + jqmOption + '> Event Speaker </a>');
+		document.write('  </li>');
+		document.write('  <li>');
+		document.write('    <a href="' + strLink + 'location-and-map" ' + jqmOption + '> Location & Map </a>');
+		document.write('  </li>');
+		document.write('  <li>');
+		document.write('    <a href="' + strLink + 'feedback" ' + jqmOption + '> Feedback</a>');
+		document.write('  </li>');
+		document.write('  <li>');
+		document.write('    <a href="' + strLink + 'audio" ' + jqmOption + '> Audio </a>');
+		document.write('  </li>');
+		document.write('  <li>');
+		document.write('    <a href="' + strLink + 'donation" ' + jqmOption + '> Donation Information </a>');
+		document.write('  </li>');
+		document.write('  <li>');
+		document.write('    <a href="#settingPage" data-transition="none" data-prefetch> Setting </a>');
+		document.write('  </li>');
+		
+		
+		document.write('</ul>');		
+		document.write('/p>');
+		
+	 </script>	 
    </div>
 
    <footer data-role="footer" data-position="fixed" class="rbc">
@@ -126,7 +150,6 @@
  
   <div data-role="page" id="settingPage">
    <header data-role="header" class="rbc">
-	 <a href="#mainPage" data-rel="back" data-transition="none">Back</a>   
      <h1>
        Setting
      </h1>
@@ -137,21 +160,17 @@
 		<p id="message"/>
 		<fieldset data-role="controlgroup">
 			<legend><strong>Select country for RBC events:</strong></legend>
-				<input type="radio" name="country" id="ID" value="ID"  />
-				<label for="ID">Indonesia</label>
+				<input type="radio" name="country" id="id" value="Indonesia"  />
+				<label for="id">Indonesia</label>
 
-				<input type="radio" name="country" id="SG" value="SG"  />
-				<label for="SG">Singapore</label>
+				<input type="radio" name="country" id="sg" value="Singapore"  />
+				<label for="sg">Singapore</label>
 
-				<input type="radio" name="country" id="OT" value="OT"  />
-				<label for="OT">Other</label>
+				<input type="radio" name="country" id="my" value="Malaysia"  />
+				<label for="my">Malaysia</label>
 		</fieldset>
 		<input type="button" id="saveSetting" value="Save"/>
-		
-		<!--
-            <li data-role="list-divider">Selected country</li>
-            <li class="storeItem"/>		
-		-->
+
    </div>
 	
    <footer data-role="footer" data-position="fixed" class="rbc">
