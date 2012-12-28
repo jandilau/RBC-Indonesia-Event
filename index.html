@@ -1,7 +1,7 @@
 <!DOCTYPE html> 
 <html> 
    <head>    
-   <title>RBC Event</title> 
+   <title>RBC Events</title> 
    <meta name="viewport" content="width=device-width, initial-scale=1">
     
 	<link rel="stylesheet" href="css/jquery.mobile-1.2.0.min.css" />
@@ -29,7 +29,15 @@
         #settingPage h2 {
             white-space: normal;
         }
+		
+		#centeredimage{
+		width:40%; 
+		left:20%;
+		top:10%; /* (or however high you want it) */
+		} 
+		
     </style>	
+	
     <script type="text/javascript">
         var localCountryIdKey = "countryId";
 		var localCountryDescKey = "countryDesc";
@@ -39,8 +47,6 @@
 		var countryId = "";
 		var countryDesc = "";
 		var strCountry = "";
-		
-		//showStoreValue();
 		
 		//Setting Page
         $('#settingPage').live('pagecreate', function() {
@@ -57,7 +63,7 @@
             }
             else {
                 //default to Indonesia if browser does not support html5 local storage
-				countryId = "ID";
+				countryId = "id";
 				countryDesc = "Indonesia";
 				location.reload();
             }
@@ -66,8 +72,7 @@
             $('#saveSetting').click(function(e) {
 				countryId = $("input[name='country']:checked").attr("id");
 				countryDesc = $("input[name='country']:checked").val();
-				//alert("'" + countryId + "'");
-					
+				
 				//if (countryId != 'undefined') {
 					localStorage.setItem(localCountryIdKey, countryId);
 					localStorage.setItem(localCountryDescKey, countryDesc);
@@ -84,14 +89,21 @@
             countryId = localStorage.getItem(localCountryIdKey);
 			countryDesc = localStorage.getItem(localCountryDescKey);
 			
+			if (countryId==null) {
+				countryId = "id";
+			}
 			strFolder = "phonegap/rbc-" + countryId + "-srv/";
 			strLink = strSite + strFolder + "event.php?link=";
         }
 
-		function loadContent(elementSelector, sourceUrl) {
-			$(""+elementSelector+"").load("http://goldfinch.rbcintl.org/phonegap/rbc-id-srv/"+sourceURL+"");
+		function refreshNotif() {
+			//refresh notification in iframe 	
+			//alert("refrehNotif");			
+			//document.getElementById("notification").contentWindow.reload(true);
+			var f = document.getElementById('notification');
+			f.src = f.src;
 		}
-
+		
     </script>
 	
 </head> 
@@ -106,57 +118,26 @@
    <!-- /header -->
 
    <div data-role="content">
-	 <img src="img/rbc_logo.jpg" alt="RBC Ministries" align="middle"/> <br>
-
-	<!-- Display RBC Event's Country Name-->
+    <a style="text-align: center;" href="" onclick="refreshNotif(); return(true);"><img src="img/rbc_logo.jpg" alt="RBC Ministries"/></a> <br>
+	
 	 <script type="text/javascript"> 
+		// Display RBC Event's Country Name
 		showStoreValue();
 		var jqmOption = 'rel="external" data-prefetch';
 	    document.write("<strong>RBC Ministries Events - " + countryDesc + '</strong>');	
-
-		
+			
 		//Notification Area
 		var urlNotif = strSite + strFolder  + 'notification.php';
-		//document.write("<div id='notification'>Notification Area");
 		document.write("<iframe src='" + urlNotif + "' name='notification' width='100%' height='120' frameborder='0' scrolling='no'> <p>Notification area</p> </iframe>");
-		//document.write("</div>");
-		
-		/*
-		setInterval(loadIframe, 60000);
-
-		function loadIframe()
-		{
-
-		$.ajax({
-			type: 'GET',
-			url: 'document.getElementById('tracker').src',    
-			success: function(data){
-				alert('horray! 200 status code!');
-				document.getElementById("tracker").src += "";
-			},
-			error: function(data){
-				//get the status code
-				if (code == 400) {
-					alert('400 status code! user error');
-				}
-				if (code == 500) {
-					alert('500 status code! server error');
-				}
-			},
-		});
-		}
-		*/
-		
 	 </script>
 
+	 
 	 <!-- Display Menu Items -->
 	 <script type="text/javascript"> 		
-		//document.write('<br/><p>');
 		document.write('<ul data-role="listview" data-theme="c" data-dividertheme="d" data-counttheme="e">');
 		document.write('  <li>');
 		document.write('    <a href="' + strLink + 'event-information" ' + jqmOption + '> Event Information </a>');
 		document.write('  </li>');
-
 		document.write('  <li>');
 		document.write('    <a href="' + strLink + 'event-speaker" ' + jqmOption + '> Event Speaker </a>');
 		document.write('  </li>');
@@ -167,28 +148,20 @@
 		document.write('    <a href="' + strLink + 'feedback" ' + jqmOption + '> Feedback</a>');
 		document.write('  </li>');
 		document.write('  <li>');
-		document.write('    <a href="' + strLink + 'audio" ' + jqmOption + '> Audio </a>');
-		document.write('  </li>');
-		document.write('  <li>');
 		document.write('    <a href="' + strLink + 'donation" ' + jqmOption + '> Donation Information </a>');
 		document.write('  </li>');
 		document.write('  <li>');
 		document.write('    <a href="#settingPage" data-transition="none" data-prefetch> Setting </a>');
 		document.write('  </li>');
-		
-		
 		document.write('</ul>');		
-		document.write('/p>');
-		
 	 </script>	 
    </div>
 
    <footer data-role="footer" data-position="fixed" class="rbc">
       <h4>&copy; RBC Ministries 2012 </h4>
    </footer> 
-
  </div>
- <!-- /page -->
+
  
   <div data-role="page" id="settingPage">
    <header data-role="header" class="rbc">
@@ -196,7 +169,7 @@
        Setting
      </h1>
    </header>
-   <!-- /header -->
+
 
    <div data-role="content">
 		<p id="message"/>
@@ -220,4 +193,5 @@
    </footer> 
    
 </body>
+
 </html>
