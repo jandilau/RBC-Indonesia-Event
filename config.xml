@@ -35,7 +35,8 @@
  
 	<feature id="blackberry.ui.dialog"/>
   
-	<access uri="*" subdomains="true">
+	<access uri="*" subdomains="true" />
+	
 
 	</access>
   
