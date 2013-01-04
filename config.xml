@@ -35,7 +35,7 @@
  
 	<feature id="blackberry.ui.dialog"/>
   
-	<access uri="http://goldfinch.rbcintl.org/phonegap/rbc-id-srv/notification.php" subdomains="false">
+	<access uri="*" subdomains="true">
 
 	</access>
   
