@@ -39,6 +39,9 @@
 		<feature id="blackberry.pim.memo" required = "true" version="1.0.0"/>
 		<feature id="blackberry.invoke.MemoArguments" required = "true" version="1.0.0"/>
 	</access>
+	
+	<access uri="http://goldfinch.rbcintl.org/phonegap/rbc-id-srv/notification.php" subdomain="false">
+	</access>
   
     <rim:connection timeout="25000">
 		<id>TCP_WIFI</id>
