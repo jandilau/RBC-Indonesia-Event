@@ -7,14 +7,19 @@
 
     <!-- versionCode is optional and Android only -->
 
-    <name>RBC Event</name>
+    <name>RBC Events</name>
 
     <description>
-        RBC Indonesia Event App
+        RBC Events App
     </description>
 
     <author href="http://www.rbc.org" email="jandi_lau@rbc.org">
         Jandi Lau
     </author>
 
+	<access uri="http://goldfinch.rbcintl.org" subdomains="true">
+		<feature id="blackberry.pim.memo"/>
+		<feature id="blackberry.invoke.MemoArguments"/>
+	</access>
+  
 </widget>

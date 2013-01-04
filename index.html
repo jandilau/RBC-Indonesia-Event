@@ -10,10 +10,10 @@
     <link rel="stylesheet" href="css/article.css" />	
 	
 	<script type="text/javascript" charset="utf-8" src="js/jquery-1.8.2.min.js"></script>
-	
+	<script src="js/utility.js"></script>   
 	<script type="text/javascript" charset="utf-8" src="js/jquery.mobile-1.2.0.min.js"></script>
-	
-	
+	<script type="text/javascript" charset="utf-8" src="js/jquery.touchToClick.js"></script>
+	<script type="text/javascript" charset="utf-8" src="js/modernizr-latest.js"></script>
 	
 	<script type="text/javascript" charset="utf-8" src="phonegap.js"></script>  	
 
@@ -50,7 +50,7 @@
 		
 		//Setting Page
         $('#settingPage').live('pagecreate', function() {
-           // if (Modernizr.localstorage) {				
+            if (Modernizr.localstorage) {				
 				countryId = localStorage.getItem(localCountryIdKey);
 				
 				if (countryId == null || countryId.length === 0) {
@@ -60,14 +60,14 @@
 				
 			    strCountry = 'input[name=country][id=' + countryId + ']';						
 			    $(strCountry).prop("checked",true);					
-            /*}
+            }
             else {
                 //default to Indonesia if browser does not support html5 local storage
 				countryId = "id";
 				countryDesc = "Indonesia";
 				location.reload();
             }
-			*/
+			
 			//Save Button click event
             $('#saveSetting').click(function(e) {
 				countryId = $("input[name='country']:checked").attr("id");
@@ -124,13 +124,11 @@
 		// Display RBC Event's Country Name
 		showStoreValue();
 		var jqmOption = 'rel="external" data-prefetch';
-	    document.write("<h3><strong>RBC Ministries Events - " + countryDesc + '</strong></h3>');	
-		
-/*		
+	    document.write("<strong>RBC Ministries Events - " + countryDesc + '</strong>');	
+			
 		//Notification Area
 		var urlNotif = strSite + strFolder  + 'notification.php';
 		document.write("<iframe src='" + urlNotif + "' name='notification' width='100%' height='120' frameborder='0' scrolling='no'> <p>Notification area</p> </iframe>");
-*/		
 	 </script>
 
 	 
