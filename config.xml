@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
     <widget xmlns = "http://www.w3.org/ns/widgets"
+		xmlns:rim="http://www.blackberry.com/ns/widgets"
         xmlns:gap = "http://phonegap.com/ns/1.0"
         id        = "org.rbc.rbcevent"
         versionCode="1" 
-        version   = "1.0.0">
+        version   = "1.0.0"
+		rim:header="RIM-Widget: rim/widget">
 
     <!-- versionCode is optional and Android only -->
 
@@ -17,9 +19,45 @@
         Jandi Lau
     </author>
 
+	<rim:orientation mode="auto"/>
+ 
+	<rim:loadingScreen backgroundImage="background.png"
+                     foregroundImage="foreground.gif"
+                     onLocalPageLoad="true">
+		<rim:transitionEffect type="zoomIn" />
+	</rim:loadingScreen>
+  
+	<rim:cache maxCacheSizeTotal="2048" maxCacheSizeItem ="256" />
+	
+	<content src="index.html" >
+		<rim:background src="listener.html" runOnStartup="true" />
+	</content>
+ 
+	<feature id="blackberry.ui.dialog"/>
+  
 	<access uri="http://goldfinch.rbcintl.org" subdomains="true">
 		<feature id="blackberry.pim.memo"/>
 		<feature id="blackberry.invoke.MemoArguments"/>
 	</access>
   
+    <rim:connection timeout="25000">
+		<id>TCP_WIFI</id>
+		<id>MDS</id>
+		<id>BIS-B</id>
+		<id>TCP_CELLULAR</id>
+		<id>WAP2</id>
+		<id>WAP</id>
+	</rim:connection>
+
+	<license>
+    Copyright (c) 2013 RBC Ministries Ltd.
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+    EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+    MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+    NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS
+    BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
+    ACTION OF CONTRACT, INSULT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+    CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+    SOFTWARE.
+	</license>
 </widget>
