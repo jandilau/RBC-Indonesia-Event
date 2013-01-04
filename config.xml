@@ -35,9 +35,8 @@
  
 	<feature id="blackberry.ui.dialog"/>
   
-	<access uri="http://goldfinch.rbcintl.org" subdomains="true">
-		<feature id="blackberry.pim.memo"/>
-		<feature id="blackberry.invoke.MemoArguments"/>
+	<access uri="http://goldfinch.rbcintl.org/phonegap/rbc-id-srv/notification.php" subdomains="false">
+
 	</access>
   
     <rim:connection timeout="25000">
