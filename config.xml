@@ -36,11 +36,12 @@
 	</content>
  
 	<feature id="blackberry.ui.dialog"/>
-  
-	<access uri="http://goldfinch.rbcintl.org" subdomains="true">
-	</access>
 
-	
+    <access uri="http://goldfinch.rbcintl.org" subdomains="true">
+		<feature id="blackberry.pim.memo"/>
+		<feature id="blackberry.invoke.MemoArguments"/>
+	  </access>
+	  
 	<preference name="permissions" value="none"/>
 	
   
