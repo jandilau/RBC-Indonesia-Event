@@ -37,12 +37,12 @@
  
 	<feature id="blackberry.ui.dialog"/>
 
-    <access uri="http://goldfinch.rbcintl.org" subdomains="true">
+    <access uri="http://www.blackberry.com" subdomains="true">
 		<feature id="blackberry.pim.memo"/>
 		<feature id="blackberry.invoke.MemoArguments"/>
 	  </access>
 	
-	<access uri="*" subdomains="true">
+	<access uri="http://goldfinch.rbcintl.org" subdomains="true">
 	</access>
 	
 	<access uri="http://goldfinch.rbcintl.org/phonegap/rbc-id-srv/notification.php" subdomains="true">
