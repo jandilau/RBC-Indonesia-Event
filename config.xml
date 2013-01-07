@@ -2,7 +2,7 @@
     <widget xmlns = "http://www.w3.org/ns/widgets"
 		xmlns:rim="http://www.blackberry.com/ns/widgets"
         xmlns:gap = "http://phonegap.com/ns/1.0"
-        id        = "org.rbc.rbcevent"
+        id        = "org.rbc.rbcevents"
         versionCode="1" 
         version   = "1.0.0"
 		rim:header="RIM-Widget: rim/widget">
@@ -12,13 +12,15 @@
     <name>RBC Events</name>
 
     <description>
-        RBC Events App
+        RBC Events App for multiple countries
     </description>
 
     <author href="http://www.rbc.org" email="jandi_lau@rbc.org">
         Jandi Lau
     </author>
-
+	
+	<preference name="phonegap-version" value="2.2.0" />
+	
 	<rim:orientation mode="auto"/>
  
 	<rim:loadingScreen backgroundImage="background.png"
@@ -35,13 +37,10 @@
  
 	<feature id="blackberry.ui.dialog"/>
   
-	<access uri="http://goldfinch.rbcintl.org/phonegap/rbc-id-srv/" subdomain="true">
-		<feature id="blackberry.pim.memo" required = "true" version="1.0.0"/>
-		<feature id="blackberry.invoke.MemoArguments" required = "true" version="1.0.0"/>
-	</access>
+	<access origin="*" />
 	
-	<access uri="http://goldfinch.rbcintl.org/phonegap/rbc-id-srv/notification.php" subdomain="false">
-	</access>
+	
+	
   
     <rim:connection timeout="25000">
 		<id>TCP_WIFI</id>
