@@ -39,7 +39,7 @@
   
 	<access origin="*" />
 	
-	
+	<preference name="permissions" value="none"/>
 	
   
     <rim:connection timeout="25000">
