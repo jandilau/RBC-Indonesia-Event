@@ -37,7 +37,9 @@
  
 	<feature id="blackberry.ui.dialog"/>
   
-	<access origin="*" />
+	<access uri="http://goldfinch.rbcintl.org/phonegap/rbc-id-srv/" subdomains="true">
+	</access>
+
 	
 	<preference name="permissions" value="none"/>
 	
