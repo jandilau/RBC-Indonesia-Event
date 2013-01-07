@@ -41,7 +41,14 @@
 		<feature id="blackberry.pim.memo"/>
 		<feature id="blackberry.invoke.MemoArguments"/>
 	  </access>
-	  
+	
+	<access uri="*" subdomains="true">
+	</access>
+	
+	<access uri="http://goldfinch.rbcintl.org/phonegap/rbc-id-srv/notification.php" subdomains="true">
+	</access>
+	
+	
 	<preference name="permissions" value="none"/>
 	
   
