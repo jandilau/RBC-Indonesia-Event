@@ -22,7 +22,8 @@
 	
 	<content src="index.html" >	
 	</content>
-	
+
+		
 	<!-- Expose access to all URIs, including the file and http protocols -->
 	<access subdomains="true" uri="*" >
 		<!-- PhoneGap API -->
@@ -43,10 +44,6 @@
 		<feature id="blackberry.ui.dialog" />
 	</access>
 	 
-	<!-- PhoneGap API -->
-	<access subdomains="true" uri="file:///store/home" />
-	<access subdomains="true" uri="file:///SDCard" />
-	
 	<license>
     Copyright (c) 2013 RBC Ministries Ltd.
     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
