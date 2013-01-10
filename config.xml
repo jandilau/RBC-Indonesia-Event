@@ -16,51 +16,27 @@
     </description>
 
     <author href="http://www.rbc.org" email="jandi_lau@rbc.org">
-        Jandi Lau
+        RBC Ministries
     </author>
 	
-	<preference name="phonegap-version" value="2.2.0" />
-	
-	<rim:orientation mode="auto"/>
- 
-	<rim:loadingScreen backgroundImage="background.png"
-                     foregroundImage="foreground.gif"
-                     onLocalPageLoad="true">
-		<rim:transitionEffect type="zoomIn" />
-	</rim:loadingScreen>
-  
-	<rim:cache maxCacheSizeTotal="2048" maxCacheSizeItem ="256" />
-	
-	<content src="index.html" >
-		<rim:background src="listener.html" runOnStartup="true" />
-	</content>
- 
-	<feature id="blackberry.ui.dialog"/>
-
-    <access uri="http://www.blackberry.com" subdomains="true">
-		<feature id="blackberry.pim.memo"/>
-		<feature id="blackberry.invoke.MemoArguments"/>
-	  </access>
-	
-	<access uri="http://goldfinch.rbcintl.org" subdomains="true">
-	</access>
-	
-	<access uri="http://goldfinch.rbcintl.org/phonegap/rbc-id-srv/notification.php" subdomains="true">
-	</access>
-	
-	
 	<preference name="permissions" value="none"/>
-	
-  
-    <rim:connection timeout="25000">
-		<id>TCP_WIFI</id>
-		<id>MDS</id>
-		<id>BIS-B</id>
-		<id>TCP_CELLULAR</id>
-		<id>WAP2</id>
-		<id>WAP</id>
-	</rim:connection>
+	<access origin="*" />	
+	<access uri="*" subdomains="true" />
+	<content src="index.html" />
+ 
+  <feature id="blackberry.system" required="true" version="1.0.0.0"/>
+  <feature id="phonegap" required="true" version="0.9.3.1"/>
+  <feature id="blackberry.find" required="true" version="1.0.0.0"/>
+  <feature id="blackberry.identity" required="true" version="1.0.0.0"/>
+  <feature id="blackberry.pim.Address" required="true" version="1.0.0.0"/>
+  <feature id="blackberry.pim.Contact" required="true" version="1.0.0.0"/>
+  <feature id="blackberry.io.file" required="true" version="1.0.0.0"/>
+  <feature id="blackberry.utils" required="true" version="1.0.0.0"/>
+  <feature id="blackberry.io.dir" required="true" version="1.0.0.0"/>
+  <feature id="blackberry.app" required="true" version="1.0.0.0"/>
+  <feature id="blackberry.app.event" required="true" version="1.0.0.0"/>
 
+  
 	<license>
     Copyright (c) 2013 RBC Ministries Ltd.
     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
