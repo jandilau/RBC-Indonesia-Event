@@ -92,7 +92,8 @@
 			if (countryId==null) {
 				countryId = "id";
 			}
-			strFolder = "phonegap/rbc-" + countryId + "-srv/";
+			//strFolder = "phonegap/rbc-" + countryId + "-srv/";
+			strFolder = "phonegap/rbc-events/" ;
 			strLink = strSite + strFolder + "event.php?link=";
         }
 
@@ -127,8 +128,8 @@
 	    document.write("<strong>RBC Ministries Events - " + countryDesc + '</strong>');	
 			
 		//Notification Area
-		var urlNotif = strSite + strFolder  + 'notification.php';
-		document.write("<iframe src='" + urlNotif + "' name='notification' width='100%' height='120' frameborder='0' scrolling='no'> <p>Notification area</p> </iframe>");
+		var urlNotif = strSite + strFolder  + 'notification.php/countryId=' + countryId;		
+		document.write("<iframe src='" + urlNotif + "' name='" + "notification' width='100%' height='120' frameborder='0' scrolling='no'> <p>Notification area</p> </iframe>");
 	 </script>
 
 	 
@@ -136,19 +137,19 @@
 	 <script type="text/javascript"> 		
 		document.write('<ul data-role="listview" data-theme="c" data-dividertheme="d" data-counttheme="e">');
 		document.write('  <li>');
-		document.write('    <a href="' + strLink + 'event-information" ' + jqmOption + '> Event Information </a>');
+		document.write('    <a href="' + strLink + countryId + '-event-information" ' + jqmOption + '> Event Information </a>');
 		document.write('  </li>');
 		document.write('  <li>');
-		document.write('    <a href="' + strLink + 'event-speaker" ' + jqmOption + '> Event Speaker </a>');
+		document.write('    <a href="' + strLink + countryId + '-event-speaker" ' + jqmOption + '> Event Speaker </a>');
 		document.write('  </li>');
 		document.write('  <li>');
-		document.write('    <a href="' + strLink + 'location-and-map" ' + jqmOption + '> Location & Map </a>');
+		document.write('    <a href="' + strLink + countryId + '-location-and-map" ' + jqmOption + '> Location & Map </a>');
 		document.write('  </li>');
 		document.write('  <li>');
-		document.write('    <a href="' + strLink + 'feedback" ' + jqmOption + '> Feedback</a>');
+		document.write('    <a href="' + strLink + countryId + '-feedback" ' + jqmOption + '> Feedback</a>');
 		document.write('  </li>');
 		document.write('  <li>');
-		document.write('    <a href="' + strLink + 'donation" ' + jqmOption + '> Donation Information </a>');
+		document.write('    <a href="' + strLink + countryId + '-donation" ' + jqmOption + '> Donation Information </a>');
 		document.write('  </li>');
 		document.write('  <li>');
 		document.write('    <a href="#settingPage" data-transition="none" data-prefetch> Setting </a>');
@@ -158,7 +159,7 @@
    </div>
 
    <footer data-role="footer" data-position="fixed" class="rbc">
-      <h4>&copy; RBC Ministries 2012 </h4>
+      <h4>&copy; RBC Ministries 2013 </h4>
    </footer> 
  </div>
 
